@@ -1,0 +1,12 @@
+{
+  "name": "learn_node",
+  "version": "1.0.0",
+  "description": "Learn node.js from beginning",
+  "main": "01_Node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node 01_Node"
+  },
+  "author": "",
+  "license": "ISC"
+}
