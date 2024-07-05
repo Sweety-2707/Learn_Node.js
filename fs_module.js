@@ -1,9 +1,12 @@
 const fs = require("fs");
+const os = require("os");
 
-// Sync write method
+console.log(os.cpus().length); // no of thread
+
+// Sync write method - Blocking call (Block other request)
 // fs.writeFileSync("./file1.txt","Hello World!\n");
 
-// Async write method
+// Async write method- Non Blocking call
 // fs.writeFile("./file1.txt","Hello World Async\n",(err)=>{});
 
 // Sync read method
