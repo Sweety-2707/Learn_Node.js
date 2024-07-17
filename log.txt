@@ -1,4 +1,4 @@
-1720186905986 : Request Received from - /about 
-1720186906025 : Request Received from - /favicon.ico 
-1720186944767 : Request Received from - /about 
-1720186944955 : Request Received from - /favicon.ico 
+1721218858183 : GET: Request Received from - /signup?username=Sweety 
+1721218864896 : GET: Request Received from - /about 
+1721218869486 : GET: Request Received from - / 
+1721218880510 : GET: Request Received from - /about?username=SweetySharma&password=sweety 
