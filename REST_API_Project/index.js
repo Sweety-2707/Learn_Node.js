@@ -9,16 +9,20 @@ const app = express();
 //Built-in Middleware
 app.use(express.urlencoded({ extended: false }));
 
-app.use((req,res,next)=>{
-    console.log("Middleware 1");
-    next();
+app.use((req, res, next) => {
+  console.log("Middleware 1");
+  next();
 });
 
-app.use((req,res,next)=>{
-    console.log("Middleware 2");
-    fs.appendFile("./log.txt",`${Date.now()}:${req.path}:${req.method}\n`,(err,data)=>{
-        next();
-    });
+app.use((req, res, next) => {
+  console.log("Middleware 2");
+  fs.appendFile(
+    "./log.txt",
+    `${Date.now()}:${req.path}:${req.method}\n`,
+    (err, data) => {
+      next();
+    }
+  );
 });
 
 // JSON rendering
@@ -51,6 +55,11 @@ app
     // GET user with dynamic ID
     const id = req.params.id;
     const user = users.find((user) => user.id == id);
+    if (!user) {
+      return res.status(404).json({ msg: "User not Found!" });
+    }
+    console.log(req.headers); // Get Request Headers
+    res.setHeader("X-Username", "Sweety"); // Add Custom response header (X-)
     res.json(user);
   })
   .patch((req, res) => {
@@ -66,7 +75,7 @@ app
         return res.json({ status: "Gender Changed!", User: user });
       });
     } else {
-      return res.json({ status: "User not Found!" });
+      return res.status(404).json({ status: "User not Found!" });
     }
   })
   .delete((req, res) => {
@@ -81,12 +90,21 @@ app
         return res.json({ status: `Deleted Id : ${id}` });
       });
     } else {
-      return res.json({ status: "User not Found!" });
+      return res.status(404).json({ status: "User not Found!" });
     }
   });
 
 app.post("/api/users", (req, res) => {
   const body = req.body;
+  if (
+    !body ||
+    !body.first_name ||
+    !body.last_name ||
+    !body.gender ||
+    !body.email
+  ) {
+    return res.status(400).json({ alert: "All field are necessary" });
+  }
   console.log(body);
   users.push({ ...body, id: users.length + 1 });
   fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {

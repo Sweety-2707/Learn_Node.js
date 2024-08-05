@@ -4,13 +4,13 @@
   "description": "Learn node.js from beginning",
   "main": "01_Node.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node 01_Node"
+    "start": "nodemon REST_API_Project/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
+    "nodemon": "^3.1.4",
     "url": "^0.11.3"
   }
 }
