@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 20px;
+      }
+      .center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URLS</title>
+  </head>
+  <body>
+    <h1 style="text-align: center">Shorten URLS</h1>
+
+    <table class="center">
+      <thead>
+        <th>Sr.no</th>
+        <th>Short URL</th>
+        <th>Original URL</th>
+        <th>Total Clicks</th>
+      </thead>
+      <% if (locals.urls) { %> <% urls.forEach((url,index) => { %>
+      <tr>
+        <td><%= index +1 %></td>
+        <td>http://localhost:8000/urls/<%= url.shortURL %></td>
+        <td><%= url.requiredURL %></td>
+        <td><%= url.history.length %></td>
+      </tr>
+      <% }) %> <% } %>
+    </table>
+  </body>
+</html>
