@@ -1,14 +1,14 @@
 const express = require("express");
-const {generateNewShortURL, handleRedirectURL, handleViewAllURL, generateNewURLFromOriginal} = require("../controllers/url")
+const { handleUserSignUp, userSignUp, userLogin, handleUserLogin } = require("../controllers/user");
 
 const router =express.Router();
 
-router.post('/url',generateNewShortURL);
+router.get('/signup',userSignUp)
 
-router.get('/urls/:shortURL',handleRedirectURL)
+router.post('/signup',handleUserSignUp)
 
-router.get('/views',handleViewAllURL)
+router.get("/login",userLogin)
 
-router.get('/',generateNewURLFromOriginal)
+router.post("/login",handleUserLogin)
 
 module.exports=router;
