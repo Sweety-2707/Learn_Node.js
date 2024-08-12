@@ -1,5 +1,5 @@
 const express = require("express");
-const { generateNewURLFromOriginal, handleViewAllURL, handleRedirectURL, generateNewShortURL, handleRestrictedViews } = require("../controllers/url");
+const { generateNewURLFromOriginal, handleViewAllURL, handleRedirectURL, generateNewShortURL, handleRestrictedToAdminViews } = require("../controllers/url");
 const { restrictAccess } = require("../middlewares/auth");
 
 const router =express.Router();
@@ -13,6 +13,6 @@ router.get('/views',handleViewAllURL)
 router.get('/',generateNewURLFromOriginal)
 
 
-router.get('/admin/url',restrictAccess(["ADMIN"]),handleRestrictedViews)
+router.get('/admin/url',restrictAccess(["ADMIN"]),handleRestrictedToAdminViews)
 
 module.exports = router;

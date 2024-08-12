@@ -37,6 +37,9 @@
         <th>Short URL</th>
         <th>Original URL</th>
         <th>Total Clicks</th>
+        <% if (locals.role) { %>
+         <th>User Email</th>
+        <% } %>
       </thead>
       <% if (locals.urls) { %> <% urls.forEach((url,index) => { %>
       <tr>
@@ -44,6 +47,9 @@
         <td>http://localhost:8000/urls/<%= url.shortURL %></td>
         <td><%= url.requiredURL %></td>
         <td><%= url.history.length %></td>
+        <% if (locals.role) { %>
+         <td><%= emails[index] %></td>
+        <% } %>
       </tr>
       <% }) %> <% } %>
     </table>

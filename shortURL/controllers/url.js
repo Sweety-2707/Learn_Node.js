@@ -8,17 +8,15 @@ async function generateNewShortURL(req, res) {
   }
 
   const shortURL = shortid();
-  console.log(req.user.id);
-  
   await URL.create({
     shortURL: shortURL,
     requiredURL: req.body.url,
     history: [],
-    createdBy:req.user.id,
+    createdBy: req.user.id,
   });
-  return res.render("home",{
-    url:shortURL
-  })
+  return res.render("home", {
+    url: shortURL,
+  });
   return res.status(200).json({ ShortURL: `${shortURL}` });
 }
 
@@ -37,24 +35,29 @@ async function handleRedirectURL(req, res) {
   res.redirect(entry.requiredURL);
 }
 
-async function handleViewAllURL(req,res){
-    const allURLS=await URL.find({createdBy:req.user.id});
-    return res.render("viewAllURL",{
-        urls:allURLS,                   
-    })
+async function handleViewAllURL(req, res) {
+  const allURLS = await URL.find({ createdBy: req.user.id });
+  return res.render("viewAllURL", {
+    urls: allURLS,
+  });
 }
 
-async function generateNewURLFromOriginal(req,res){
-    return res.render("home");
+async function generateNewURLFromOriginal(req, res) {
+  return res.render("home");
 }
 
-async function handleRestrictedViews(req,res){
-  const Users = await User.find({})
-  
-  const allURLS=await URL.find({});
-    return res.render("viewAllURL",{
-        urls:allURLS,             
-    })
+async function handleRestrictedToAdminViews(req, res) {
+  const allURLS = await URL.find({});
+  const emails = [];
+  for (const url of allURLS) {
+    const user = await User.find({ _id: Object(url.createdBy) });
+    emails.push(user[0].email);
+  }
+  return res.render("viewAllURL", {
+    urls: allURLS,
+    role: "ADMIN",
+    emails: emails,
+  });
 }
 
 module.exports = {
@@ -62,5 +65,5 @@ module.exports = {
   handleRedirectURL,
   handleViewAllURL,
   generateNewURLFromOriginal,
-  handleRestrictedViews
+  handleRestrictedToAdminViews,
 };

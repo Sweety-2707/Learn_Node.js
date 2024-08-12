@@ -11,9 +11,7 @@ async function restrictLoggedInUser(req,res,next){
         return res.redirect('/user/login');
     }
 
-    req.user=user;  
-    console.log("User:",req.user);
-      
+    req.user=user;        
     next();
 }
 
