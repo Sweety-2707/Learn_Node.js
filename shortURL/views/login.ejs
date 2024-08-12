@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        .container {
+          text-align: center;
+          padding-top: 50px;
+        }
+        #btn {
+          font-size: 20px;
+          margin: 20px;
+        }
+        div {
+          padding: 10px;
+        }
+      </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
-<body>
+<body class="container">
     <h1>Login</h1>
     <% if (locals.msg) { %>
      <%= msg %>
     <% } %>
-    <form method="post" action="/login">
-        <label>Enter your Email Id</label>
-        <input type="text" name="email" required>
-        <label>Enter your Password</label>
-        <input type="text" name="password" required>
-        <button type="submit">Submit</button>
+    <form method="post" action="/user/login">
+        <div>
+            <label>Enter your Email Id</label>
+            <input type="text" name="email" required>
+        </div>
+        <div>
+            <label>Enter your Password</label>
+            <input type="text" name="password" required>
+        </div>
+        <button type="submit" id="btn">Login</button>
     </form>
+    Not Registered?<a href="/user/signup">SignUp</a>
 </body>
 </html>

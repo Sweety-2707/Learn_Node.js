@@ -1,5 +1,6 @@
 const URL = require("../models/url");
 const shortid = require("shortid");
+const User = require("../models/user");
 
 async function generateNewShortURL(req, res) {
   if (!req.body.url) {
@@ -7,10 +8,13 @@ async function generateNewShortURL(req, res) {
   }
 
   const shortURL = shortid();
+  console.log(req.user.id);
+  
   await URL.create({
     shortURL: shortURL,
     requiredURL: req.body.url,
     history: [],
+    createdBy:req.user.id,
   });
   return res.render("home",{
     url:shortURL
@@ -34,7 +38,7 @@ async function handleRedirectURL(req, res) {
 }
 
 async function handleViewAllURL(req,res){
-    const allURLS=await URL.find({});
+    const allURLS=await URL.find({createdBy:req.user.id});
     return res.render("viewAllURL",{
         urls:allURLS,                   
     })
@@ -44,9 +48,19 @@ async function generateNewURLFromOriginal(req,res){
     return res.render("home");
 }
 
+async function handleRestrictedViews(req,res){
+  const Users = await User.find({})
+  
+  const allURLS=await URL.find({});
+    return res.render("viewAllURL",{
+        urls:allURLS,             
+    })
+}
+
 module.exports = {
   generateNewShortURL,
   handleRedirectURL,
   handleViewAllURL,
-  generateNewURLFromOriginal
+  generateNewURLFromOriginal,
+  handleRestrictedViews
 };

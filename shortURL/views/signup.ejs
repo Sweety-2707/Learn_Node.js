@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <style>
+      .container {
+        text-align: center;
+        padding-top: 50px;
+      }
+      #btn {
+        font-size: 20px;
+        margin: 20px;
+      }
+      div {
+        padding: 10px;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SignUp</title>
-</head>
-<body>
+  </head>
+  <body class="container">
     <h1>Sign Up</h1>
-    <% if (locals.msg) { %>
-     <%= msg %>
-    <% } %>
-    <form method="post" action="/signup">
+    <% if (locals.msg) { %> <%= msg %> <% } %>
+    <form method="post" action="/user/signup">
+      <div>
         <label>Enter your Full Name</label>
-        <input type="text" name="name" required>
+        <input type="text" name="name" required />
+      </div>
+      <div>
         <label>Enter your Email Id</label>
-        <input type="text" name="email" required>
+        <input type="text" name="email" required />
+      </div>
+      <div>
         <label>Enter your Password</label>
-        <input type="text" name="password" required>
-        <button type="submit">Submit</button>
+        <input type="text" name="password" required />
+      </div>
+      <button type="submit" id="btn">Submit</button>
     </form>
-</body>
+    Already Registered?<a href="/user/login">Login</a>
+  </body>
 </html>

@@ -1,7 +1,7 @@
 const { getUser } = require("../services/auth");
 
 async function restrictLoggedInUser(req,res,next){
-    const userId = req.cookies.uid;
+    const userId = req.cookies?.uid;
     if(!userId){
         return res.redirect('/user/login');
     }
@@ -11,10 +11,21 @@ async function restrictLoggedInUser(req,res,next){
         return res.redirect('/user/login');
     }
 
-    req.user=user;
+    req.user=user;  
+    console.log("User:",req.user);
+      
     next();
+}
+
+function restrictAccess(roles=[]){
+    return function(req,res,next){
+        if(!req.user) return res.redirect('/user/login');
+        if(!roles.includes(req.user.role)) return res.end("You are not Authorized!");
+        return next();
+    }
 }
 
 module.exports ={
     restrictLoggedInUser,
+    restrictAccess,
 }

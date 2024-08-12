@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      .container {
+        text-align: center;
+        padding-top: 50px;
+      }
+      #btn {
+        font-size: 20px;
+      }
+      div {
+        padding: 10px;
+      }
+    </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HomePage</title>
   </head>
   <body>
-    <h1>URL Shortener</h1>
+    <h1 class="container">URL Shortener</h1>
     <form method="post" action="/url">
-      <div>
-        <label>Enter Original URL</label>
-        <input type="text" placeholder="http://example.com" name="url"/>
-        <button type="submit">Generate</button>
+      <div class="container">
+        <div><label style="font-size: 20px">Enter Original URL</label></div>
+        <div>
+          <input type="text" placeholder="http://example.com" name="url" />
+        </div>
+        <button type="submit" id="btn">Generate</button>
         <% if (locals.url) { %>
-         <p>
-            Generated URL is http://localhost:8000/urls/<%= url %>
-        <% } %>
+        <p>Generated URL is http://localhost:8000/urls/<%= url %> <% } %></p>
       </div>
     </form>
+    <div class="container" style="font-size: larger;">
+      Want to See Generated Short Url?
+      <div>
+        <a href="/views"><button id="btn">View URL genereated by You!</button></a>
+        <a href="/admin/url"><button id="btn">View All URL genereated!</button></a>
+      </div>
+    </div>
   </body>
 </html>

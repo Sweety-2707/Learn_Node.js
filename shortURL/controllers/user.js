@@ -31,10 +31,12 @@ async function handleUserLogin(req,res){
         })
     }
 
-    const sessionId = uuid();
-    setUser(sessionId,user);
-    res.cookie("uid",sessionId);
-    console.log(getUser(sessionId),sessionId);
+    // const sessionId = uuid();  ///statefull-auth
+    // setUser(sessionId,user);
+    // res.cookie("uid",sessionId);
+
+    const token = setUser(user);
+    res.cookie("uid",token);
     
     return res.redirect("/");
 }
