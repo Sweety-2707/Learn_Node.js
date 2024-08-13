@@ -1,6 +1,7 @@
+require('dotenv').config()
 const express = require("express");
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT;
 const router = require("./routers/url");
 const restrictedRouter = require("./routers/restrictedURL")
 const { mongooseConnection } = require("./connection");
@@ -9,7 +10,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const { restrictLoggedInUser } = require("./middlewares/auth");
 
-mongooseConnection("mongodb://127.0.0.1:27017/shortURL").then(() =>
+mongooseConnection(process.env.MONGO_URL).then(() =>
   console.log("mongoDB Connected!")
 );
 app.use(express.json());
