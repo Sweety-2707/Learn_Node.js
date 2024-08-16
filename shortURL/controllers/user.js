@@ -38,7 +38,15 @@ async function handleUserLogin(req,res){
     const token = setUser(user);
     res.cookie("uid",token);
     
+    // return res.status(200).json({
+    //     token
+    // })
     return res.redirect("/");
+}
+
+async function handleUserLogout(req,res){
+    res.clearCookie('uid');
+    return res.redirect('/')
 }
 
 module.exports={
@@ -46,4 +54,5 @@ module.exports={
     userSignUp,
     userLogin,
     handleUserLogin,
+    handleUserLogout
 }

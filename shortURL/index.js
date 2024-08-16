@@ -1,5 +1,4 @@
 require('dotenv').config()
-const {cors}=require("cors")
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT;
@@ -15,7 +14,6 @@ mongooseConnection(process.env.MONGO_URL).then(() =>
   console.log("mongoDB Connected!")
 );
 app.use(express.json());
-app.use(cors())
 app.use(express.urlencoded())
 app.use(cookieParser());
 app.set('view engine',"ejs");
