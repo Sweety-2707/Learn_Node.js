@@ -2,6 +2,11 @@
 <html lang="en">
   <head>
     <style>
+      table{
+        table-layout: fixed;
+        width: 100%;
+        word-wrap: break-word;
+      }
       table,
       th,
       td {
@@ -31,24 +36,24 @@
   <body>
     <h1 style="text-align: center">Shorten URLS Generetaed:</h1>
 
-    <table class="center" style="width: 100%;">
+    <table class="center">
       <thead>
         <th style="width: 10%;">Sr.no</th>
         <th style="width: 30%;">Short URL</th>
         <th style="width: 30%;">Original URL</th>
-        <th style="width: 20%;">Total Clicks</th>
+        <th style="width: 10%;">Total Clicks</th>
         <% if (locals.role) { %>
-         <th style="width: 30%;">User Email</th>
+         <th style="width: 20%;">User Email</th>
         <% } %>
       </thead>
       <% if (locals.urls) { %> <% urls.forEach((url,index) => { %>
       <tr>
-        <td><%= index +1 %></td>
-        <td>http://localhost:8000/urls/<%= url.shortURL %></td>
-        <td><%= url.requiredURL %></td>
-        <td><%= url.history.length %></td>
+        <td style="width: 10%;"><%= index +1 %></td>
+        <td style="width: 30%;">http://localhost:8000/urls/<%= url.shortURL %></td>
+        <td style="width: 30%;"><%= url.requiredURL %></td>
+        <td style="width: 10%;"><%= url.history.length %></td>
         <% if (locals.role) { %>
-         <td><%= emails[index] %></td>
+         <td style="width: 20%;"><%= emails[index] %></td>
         <% } %>
       </tr>
       <% }) %> <% } %>
