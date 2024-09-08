@@ -1,4 +1,5 @@
 const { getUser } = require("../services/auth");
+const popup =require('node-popup')
 
 async function restrictLoggedInUser(req,res,next){
     const userId = req.cookies?.uid;
@@ -18,7 +19,10 @@ async function restrictLoggedInUser(req,res,next){
 function restrictAccess(roles=[]){
     return function(req,res,next){
         if(!req.user) return res.redirect('/user/login');
-        if(!roles.includes(req.user.role)) return res.end("You are not Authorized!");
+        if(!roles.includes(req.user.role)){
+            
+            return res.redirect("/?message=You are not Authorized!",);
+        }
         return next();
     }
 }

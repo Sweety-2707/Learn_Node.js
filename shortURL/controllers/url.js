@@ -3,6 +3,7 @@ const shortid = require("shortid");
 const User = require("../models/user");
 
 async function generateNewShortURL(req, res) {
+  
   if (!req.body.url) {
     return res.status(400).json({ alert: "URL is required" });
   }
@@ -43,7 +44,9 @@ async function handleViewAllURL(req, res) {
 }
 
 async function generateNewURLFromOriginal(req, res) {
-  return res.render("home");
+  const {message} = req.query;
+  return res.render("home",{
+    msg: message});
 }
 
 async function handleRestrictedToAdminViews(req, res) {

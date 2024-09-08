@@ -16,7 +16,7 @@ mongooseConnection(process.env.MONGO_URL).then(() =>
 app.use(express.json());
 app.use(express.urlencoded())
 app.use(cookieParser());
-app.set('view engine',"ejs");
+app.set('view engine','ejs');
 app.set("views",path.resolve("./views"))
 
 app.use('/user',router);

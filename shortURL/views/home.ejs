@@ -25,6 +25,13 @@
     <title>HomePage</title>
   </head>
   <body>
+    <script>
+
+      if('<%= locals.msg %>'){
+        alert('<%= locals.msg %>');
+      }
+    </script>
+
     <h1 class="container">URL Shortener</h1>
     <form method="post" action="/url">
       <div class="container">
@@ -37,13 +44,17 @@
         <p>Generated URL is http://localhost:8000/urls/<%= url %> <% } %></p>
       </div>
     </form>
-    <div class="container" style="font-size: larger;">
+    <div class="container" style="font-size: larger">
       Want to See Generated Short Url?
       <div>
-        <a href="/views"><button id="btn">View URL genereated by You!</button></a>
-        <a href="/admin/url"><button id="btn">View All URL genereated!</button></a>
+        <a href="/views"
+          ><button id="btn">View URL genereated by You!</button></a
+        >
+        <a href="/admin/url"
+          ><button id="btn">View All URL genereated!</button></a
+        >
       </div>
-      <div style="margin-top: 20px;">
+      <div style="margin-top: 20px">
         <a href="/logout"><button id="btn-logout">Logout</button></a>
       </div>
     </div>
